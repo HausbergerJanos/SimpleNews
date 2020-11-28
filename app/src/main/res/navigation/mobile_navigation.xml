@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_news"
-        android:name="eu.codeyard.simplenews.ui.newsfeed.NewsFragment"
+        android:name="eu.codeyard.simplenews.ui.newsfeed.NewsFragment_"
         android:label="@string/title_news"
         tools:layout="@layout/fragment_news" />
 
     <fragment
         android:id="@+id/navigation_favourites"
-        android:name="eu.codeyard.simplenews.ui.favourites.FavouritesFragment"
+        android:name="eu.codeyard.simplenews.ui.favourites.FavouritesFragment_"
         android:label="@string/title_favourites"
         tools:layout="@layout/fragment_favourites" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="eu.codeyard.simplenews.ui.profile.ProfileFragment"
+        android:name="eu.codeyard.simplenews.ui.profile.ProfileFragment_"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

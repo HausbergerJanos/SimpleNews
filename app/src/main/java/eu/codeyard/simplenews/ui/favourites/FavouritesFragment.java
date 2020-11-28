@@ -1,5 +1,6 @@
 package eu.codeyard.simplenews.ui.favourites;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,24 +13,31 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
 import eu.codeyard.simplenews.R;
 
+@SuppressLint("NonConstantResourceId")
+@EFragment(R.layout.fragment_favourites)
 public class FavouritesFragment extends Fragment {
+
+    @ViewById
+    protected TextView favouritesTitle;
 
     private FavouritesViewModel favouritesViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         favouritesViewModel =
                 new ViewModelProvider(this).get(FavouritesViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_favourites, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        favouritesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        return root;
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @AfterViews
+    protected void init() {
+        favouritesViewModel.getText().observe(getViewLifecycleOwner(), s -> favouritesTitle.setText(s));
     }
 }

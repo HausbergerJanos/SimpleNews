@@ -1,5 +1,6 @@
 package eu.codeyard.simplenews.ui.profile;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,24 +13,32 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+import org.w3c.dom.Text;
+
 import eu.codeyard.simplenews.R;
 
+@SuppressLint("NonConstantResourceId")
+@EFragment(R.layout.fragment_profile)
 public class ProfileFragment extends Fragment {
+
+    @ViewById
+    protected TextView profileTitle;
 
     private ProfileViewModel profileViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         profileViewModel =
                 new ViewModelProvider(this).get(ProfileViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        return root;
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @AfterViews
+    protected void init() {
+        profileViewModel.getText().observe(getViewLifecycleOwner(), s -> profileTitle.setText(s));
     }
 }
