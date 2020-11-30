@@ -2,6 +2,7 @@ package eu.codeyard.simplenews.ui.newsfeed;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +34,19 @@ public class NewsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         newsViewModel =
                 new ViewModelProvider(this).get(NewsViewModel.class);
+        newsViewModel.initViewModel(getContext());
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @AfterViews
     protected void init() {
         newsViewModel.getText().observe(getViewLifecycleOwner(), s -> newsTitle.setText(s));
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                newsViewModel.getNewsFeed();
+            }
+        }, 1000);
     }
 }
