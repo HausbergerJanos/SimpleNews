@@ -1,15 +1,25 @@
 package eu.codeyard.simplenews.ui.newsfeed;
 
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 
+import java.util.List;
+
+import eu.codeyard.simplenews.business.domain.model.Article;
+import eu.codeyard.simplenews.business.interactors.TestInsert;
+import eu.codeyard.simplenews.business.interactors.TestInsert_;
 import eu.codeyard.simplenews.network.NewsDTO;
 import eu.codeyard.simplenews.network.NewsNetworkDataSource;
 import eu.codeyard.simplenews.network.NewsNetworkDataSource_;
@@ -17,18 +27,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NewsViewModel extends ViewModel {
+public class NewsViewModel extends AndroidViewModel {
 
     protected NewsNetworkDataSource newsNetworkDataSource;
+    private TestInsert testInsert;
 
     private MutableLiveData<String> mText;
 
-    public NewsViewModel() {
-        mText = new MutableLiveData<>();
-    }
+    private LiveData<List<Article>> articles;
 
-    public void initViewModel(Context context) {
-        newsNetworkDataSource = NewsNetworkDataSource_.getInstance_(context);
+    public NewsViewModel(@NonNull Application application) {
+        super(application);
+        mText = new MutableLiveData<>();
+        testInsert = TestInsert_.getInstance_(application);
+        articles = testInsert.getAllArticles();
         mText.setValue("This is news fragment");
     }
 
@@ -47,7 +59,19 @@ public class NewsViewModel extends ViewModel {
         });
     }
 
+    public void getAllArticles() {
+        articles = testInsert.getAllArticles();
+    }
+
+    public void testInsert() {
+        testInsert.executeTestInsertion();
+    }
+
     public LiveData<String> getText() {
         return mText;
+    }
+
+    public LiveData<List<Article>> getArticles() {
+        return articles;
     }
 }
