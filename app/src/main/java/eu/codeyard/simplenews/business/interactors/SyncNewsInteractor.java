@@ -1,0 +1,75 @@
+package eu.codeyard.simplenews.business.interactors;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EBean;
+
+import java.util.List;
+import java.util.Objects;
+
+import eu.codeyard.simplenews.BaseApplication;
+import eu.codeyard.simplenews.business.data.cache.abstraction.NewsCacheDataSource;
+import eu.codeyard.simplenews.business.data.cache.implementation.NewsCacheDataSourceImpl;
+import eu.codeyard.simplenews.business.data.network.abstraction.NewsNetworkDataSource;
+import eu.codeyard.simplenews.business.data.network.implementation.NewsNetworkDataSourceImpl;
+import eu.codeyard.simplenews.business.domain.model.Article;
+
+@EBean(scope = EBean.Scope.Singleton)
+public class SyncNewsInteractor {
+
+    @App
+    protected BaseApplication app;
+
+    private NewsCacheDataSource newsCacheDataSource;
+    private NewsNetworkDataSource newsNetworkDataSource;
+
+    @AfterInject
+    protected void init() {
+        newsCacheDataSource = new NewsCacheDataSourceImpl(app);
+        newsNetworkDataSource = new NewsNetworkDataSourceImpl();
+    }
+
+    public LiveData<List<Article>> syncNews(LifecycleOwner lifecycleOwner) {
+        // Init LiveData which will be updated first from cache and after that from network
+        MutableLiveData<List<Article>> articles = new MutableLiveData<>();
+
+        // Get cache data source
+        LiveData<List<Article>> newsCacheData = newsCacheDataSource.getAllNews();
+
+        // Observe cache data
+        newsCacheData.observe(lifecycleOwner, data -> {
+            // Set news from cache
+            articles.setValue(data);
+
+            // We don't want to observe cached data anymore
+            newsCacheData.removeObservers(lifecycleOwner);
+
+            // Fetch news from network
+            getNewsFromNetwork(lifecycleOwner, articles);
+        });
+
+        return articles;
+    }
+
+    private void getNewsFromNetwork(LifecycleOwner lifecycleOwner, MutableLiveData<List<Article>> liveData) {
+        newsNetworkDataSource.getTopNews().observe(lifecycleOwner, articles -> {
+            // Set news from network
+            liveData.setValue(articles);
+
+            // Update cache with news from the network
+            insertArticles(lifecycleOwner, liveData);
+        });
+    }
+
+    @Background
+    protected void insertArticles(LifecycleOwner lifecycleOwner, MutableLiveData<List<Article>> liveData) {
+        for (Article article : Objects.requireNonNull(liveData.getValue())) {
+            newsCacheDataSource.insert(article);
+        }
+    }
+}
