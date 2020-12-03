@@ -1,38 +1,22 @@
-package eu.codeyard.simplenews.framework.datasource.cache.model;
+package eu.codeyard.simplenews.framework.datasource.network.model;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+public class ArticleDTO {
 
-@Entity(tableName = "articles")
-public class ArticleCacheEntity {
-
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int id;
-
-    @ColumnInfo(name = "tile")
     private String title;
 
-    @ColumnInfo(name = "description")
     private String description;
 
-    @ColumnInfo(name = "url")
     private String url;
 
-    @ColumnInfo(name = "urlToImage")
     private String urlToImage;
 
-    @ColumnInfo(name = "publishedAt")
-    private Long publishedAt;
+    private String publishedAt;
 
-    @ColumnInfo(name = "source")
-    private String source;
+    private SourceDTO source;
 
-    @ColumnInfo(name = "author")
     private String author;
 
-    public ArticleCacheEntity(String title, String description, String url, String urlToImage, Long publishedAt, String source, String author) {
+    public ArticleDTO(String title, String description, String url, String urlToImage, String publishedAt, SourceDTO source, String author) {
         this.title = title;
         this.description = description;
         this.url = url;
@@ -40,14 +24,6 @@ public class ArticleCacheEntity {
         this.publishedAt = publishedAt;
         this.source = source;
         this.author = author;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -82,19 +58,19 @@ public class ArticleCacheEntity {
         this.urlToImage = urlToImage;
     }
 
-    public Long getPublishedAt() {
+    public String getPublishedAt() {
         return publishedAt;
     }
 
-    public void setPublishedAt(Long publishedAt) {
+    public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
     }
 
-    public String getSource() {
+    public SourceDTO getSource() {
         return source;
     }
 
-    public void setSource(String source) {
+    public void setSource(SourceDTO source) {
         this.source = source;
     }
 

@@ -1,23 +1,20 @@
 package eu.codeyard.simplenews.business.interactors;
 
-import android.util.Log;
-
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
+import androidx.lifecycle.MutableLiveData;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.UiThread;
 
 import java.util.List;
-import java.util.UUID;
 
 import eu.codeyard.simplenews.BaseApplication;
-import eu.codeyard.simplenews.business.data.cache.abstraction.ArticlesCacheDataSource;
-import eu.codeyard.simplenews.business.data.cache.implementation.ArticlesCacheDataSourceImpl;
+import eu.codeyard.simplenews.business.data.cache.abstraction.NewsCacheDataSource;
+import eu.codeyard.simplenews.business.data.cache.implementation.NewsCacheDataSourceImpl;
+import eu.codeyard.simplenews.business.data.network.abstraction.NewsNetworkDataSource;
+import eu.codeyard.simplenews.business.data.network.implementation.NewsNetworkDataSourceImpl;
 import eu.codeyard.simplenews.business.domain.model.Article;
 
 @EBean(scope = EBean.Scope.Singleton)
@@ -26,27 +23,25 @@ public class TestInsert {
     @App
     protected BaseApplication app;
 
-    private ArticlesCacheDataSource articlesCacheDataSource;
+    private NewsCacheDataSource newsCacheDataSource;
+    private NewsNetworkDataSource newsNetworkDataSource;
 
     @AfterInject
     protected void init() {
-        articlesCacheDataSource = new ArticlesCacheDataSourceImpl(app);
+        newsCacheDataSource = new NewsCacheDataSourceImpl(app);
+        newsNetworkDataSource = new NewsNetworkDataSourceImpl();
     }
 
     @Background
-    public void executeTestInsertion() {
-        Article article = new Article(
-                "Ez egy teszt",
-                "Lorem ipsum",
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
-                184484L
-        );
-
-        articlesCacheDataSource.insert(article);
+    public void executeTestInsertion(Article article) {
+        newsCacheDataSource.insert(article);
     }
 
-    public LiveData<List<Article>> getAllArticles() {
-        return articlesCacheDataSource.getAllArticle();
+    public LiveData<List<Article>> getNewsFromNetwork() {
+        return newsNetworkDataSource.getTopNews();
+    }
+
+    public LiveData<List<Article>> getNewsFromCache() {
+        return newsCacheDataSource.getAllNews();
     }
 }

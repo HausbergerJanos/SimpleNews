@@ -3,28 +3,19 @@ package eu.codeyard.simplenews.network;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.androidannotations.annotations.AfterInject;
-import org.androidannotations.annotations.EBean;
-
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import eu.codeyard.simplenews.framework.datasource.network.api.NewsAPIService;
-import eu.codeyard.simplenews.framework.datasource.network.model.NewsDTO;
+import eu.codeyard.simplenews.business.domain.model.Article;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@EBean(scope = EBean.Scope.Singleton)
-public class NewsNetworkDataSource {
+public abstract class Repository {
 
-    private NewsAPIService newsAPIService;
-
-    @AfterInject
-    protected void init() {
-
+    public Repository() {
         String baseUrl = Constants.NEWS_API_BASE_URL;
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -46,10 +37,11 @@ public class NewsNetworkDataSource {
                 .client(okHttpClientBuilder.build())
                 .build();
 
-        newsAPIService = retrofit.create(NewsAPIService.class);
+        initAPIService(retrofit);
+        init();
     }
 
-    public void getTopNews(String country, String apiKey, Callback<NewsDTO> callback) {
-        newsAPIService.getTopNews(country, apiKey).enqueue(callback);
-    }
+    public abstract void init();
+
+    public abstract void initAPIService(Retrofit retrofit);
 }

@@ -1,7 +1,7 @@
-package eu.codeyard.simplenews.network;
+package eu.codeyard.simplenews.framework.datasource.network.api;
 
+import eu.codeyard.simplenews.framework.datasource.network.model.NewsDTO;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 

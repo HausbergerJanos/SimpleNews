@@ -40,7 +40,7 @@ public class ArticlesDaoServiceImpl implements ArticlesDaoService {
     }
 
     @Override
-    public LiveData<List<Article>> getAllArticles() {
+    public LiveData<List<Article>> getAllNews() {
         return Transformations.map(articlesDao.getAllArticles(), input ->
                 articleCacheMapper.mapFromEntityList(input));
     }

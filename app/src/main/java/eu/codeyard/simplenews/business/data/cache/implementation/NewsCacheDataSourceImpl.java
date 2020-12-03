@@ -6,20 +6,20 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import eu.codeyard.simplenews.business.data.cache.abstraction.ArticlesCacheDataSource;
+import eu.codeyard.simplenews.business.data.cache.abstraction.NewsCacheDataSource;
 import eu.codeyard.simplenews.business.domain.model.Article;
 import eu.codeyard.simplenews.framework.datasource.cache.abstraction.ArticlesDaoService;
 import eu.codeyard.simplenews.framework.datasource.cache.implementation.ArticlesDaoServiceImpl;
 
-public class ArticlesCacheDataSourceImpl implements ArticlesCacheDataSource {
+public class NewsCacheDataSourceImpl implements NewsCacheDataSource {
 
     private ArticlesDaoService articlesDaoService;
 
-    private ArticlesCacheDataSourceImpl() {
+    private NewsCacheDataSourceImpl() {
         // prevent initialization without context
     }
 
-    public ArticlesCacheDataSourceImpl(Application application) {
+    public NewsCacheDataSourceImpl(Application application) {
         articlesDaoService = new ArticlesDaoServiceImpl(application);
     }
 
@@ -29,7 +29,7 @@ public class ArticlesCacheDataSourceImpl implements ArticlesCacheDataSource {
     }
 
     @Override
-    public LiveData<List<Article>> getAllArticle() {
-        return articlesDaoService.getAllArticles();
+    public LiveData<List<Article>> getAllNews() {
+        return articlesDaoService.getAllNews();
     }
 }

@@ -10,5 +10,5 @@ public interface ArticlesDaoService {
 
     void insert(Article article);
 
-    LiveData<List<Article>> getAllArticles();
+    LiveData<List<Article>> getAllNews();
 }

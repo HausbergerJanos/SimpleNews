@@ -6,9 +6,9 @@ import java.util.List;
 
 import eu.codeyard.simplenews.business.domain.model.Article;
 
-public interface ArticlesCacheDataSource {
+public interface NewsCacheDataSource {
 
     void insert(Article article);
 
-    LiveData<List<Article>> getAllArticle();
+    LiveData<List<Article>> getAllNews();
 }
