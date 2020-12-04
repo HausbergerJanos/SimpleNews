@@ -1,7 +1,9 @@
 package eu.codeyard.simplenews.ui.newsfeed;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.AsyncListDiffer;
@@ -14,6 +16,12 @@ import eu.codeyard.simplenews.R;
 import eu.codeyard.simplenews.business.domain.model.Article;
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private Interaction interaction;
+
+    public NewsAdapter(Interaction interaction) {
+        this.interaction = interaction;
+    }
 
     private DiffUtil.ItemCallback<Article> diffCallback = new DiffUtil.ItemCallback<Article>() {
         @Override
@@ -37,7 +45,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         R.layout.view_news_feed_item,
                         parent,
                         false
-                )
+                ),
+                interaction
         );
     }
 
@@ -57,5 +66,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemCount() {
         return differ.getCurrentList().size();
+    }
+
+    public interface Interaction {
+        void onItemSelected(Article article);
     }
 }

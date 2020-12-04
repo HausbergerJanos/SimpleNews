@@ -1,8 +1,9 @@
 package eu.codeyard.simplenews.business.domain.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Article {
+public class Article implements Serializable {
 
     private String title;
 

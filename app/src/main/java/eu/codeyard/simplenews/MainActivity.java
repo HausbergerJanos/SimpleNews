@@ -1,6 +1,8 @@
 package eu.codeyard.simplenews;
 
 import android.os.Bundle;
+import android.transition.Explode;
+import android.view.Window;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

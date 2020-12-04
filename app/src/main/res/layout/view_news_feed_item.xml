@@ -13,6 +13,7 @@
     android:paddingBottom="18dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="250dp"
         app:cardBackgroundColor="@color/black"
@@ -33,6 +34,7 @@
         android:layout_gravity="top"
         android:foreground="@drawable/gradient"
         android:scaleType="centerCrop"
+        tools:src="@drawable/ic_dummy"
         app:riv_corner_radius_top_left="8dp"
         app:riv_corner_radius_top_right="8dp" />
 

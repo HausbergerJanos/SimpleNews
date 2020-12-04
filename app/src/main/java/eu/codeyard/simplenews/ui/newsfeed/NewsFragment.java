@@ -2,16 +2,16 @@ package eu.codeyard.simplenews.ui.newsfeed;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.fragment.FragmentNavigator;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,10 +25,11 @@ import eu.codeyard.simplenews.R;
 import eu.codeyard.simplenews.business.domain.model.Article;
 
 import static androidx.recyclerview.widget.RecyclerView.*;
+import static eu.codeyard.simplenews.ui.newsfeed.NewsAdapter.*;
 
 @SuppressLint("NonConstantResourceId")
 @EFragment(R.layout.fragment_news)
-public class NewsFragment extends Fragment {
+public class NewsFragment extends Fragment implements Interaction {
 
     @ViewById
     protected RecyclerView newsRecyclerView;
@@ -46,7 +47,7 @@ public class NewsFragment extends Fragment {
 
     @AfterViews
     protected void init() {
-        newsAdapter = new NewsAdapter();
+        newsAdapter = new NewsAdapter(this);
 
         initRecyclerView();
 
@@ -70,5 +71,14 @@ public class NewsFragment extends Fragment {
         newsRecyclerView.setLayoutManager(layoutManager);
 
         newsRecyclerView.setAdapter(newsAdapter);
+    }
+
+    @Override
+    public void onItemSelected(Article article) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("article", article);
+
+        NavHostFragment.findNavController(NewsFragment.this)
+                .navigate(R.id.action_navigation_news_to_newsDetailsFragment_, bundle);
     }
 }

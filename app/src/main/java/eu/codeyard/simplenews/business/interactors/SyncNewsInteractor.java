@@ -52,7 +52,7 @@ public class SyncNewsInteractor {
             newsCacheData.removeObservers(lifecycleOwner);
 
             // Fetch news from network
-            getNewsFromNetwork(lifecycleOwner, articles);
+            //getNewsFromNetwork(lifecycleOwner, articles);
         });
 
         return articles;

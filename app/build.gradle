@@ -38,6 +38,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
+    // Fragment navigation
+    def nav_version = "2.3.2"
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
+
     // Android Annotations
     def AAVersion = '4.8.0'
     annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
