@@ -1,16 +1,17 @@
 package eu.codeyard.simplenews.framework.datasource.cache.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 @Entity(tableName = "articles")
 public class ArticleCacheEntity {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int id;
-
+    @PrimaryKey(autoGenerate = false)
+    @NonNull
     @ColumnInfo(name = "tile")
     private String title;
 
@@ -32,7 +33,7 @@ public class ArticleCacheEntity {
     @ColumnInfo(name = "author")
     private String author;
 
-    public ArticleCacheEntity(String title, String description, String url, String urlToImage, Long publishedAt, String source, String author) {
+    public ArticleCacheEntity(@NotNull String title, String description, String url, String urlToImage, Long publishedAt, String source, String author) {
         this.title = title;
         this.description = description;
         this.url = url;
@@ -42,19 +43,12 @@ public class ArticleCacheEntity {
         this.author = author;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    @NotNull
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@NotNull String title) {
         this.title = title;
     }
 

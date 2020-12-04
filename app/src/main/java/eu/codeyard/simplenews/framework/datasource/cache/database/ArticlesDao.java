@@ -16,6 +16,6 @@ public interface ArticlesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(ArticleCacheEntity article);
 
-    @Query("SELECT * FROM articles")
+    @Query("SELECT * FROM articles ORDER BY publishedAt DESC")
     LiveData<List<ArticleCacheEntity>> getAllArticles();
 }

@@ -3,11 +3,13 @@ package eu.codeyard.simplenews.business.interactors;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.UiThread;
 
 import java.util.List;
 import java.util.Objects;
@@ -71,5 +73,18 @@ public class SyncNewsInteractor {
         for (Article article : Objects.requireNonNull(liveData.getValue())) {
             newsCacheDataSource.insert(article);
         }
+
+        getCachedNewsOnUI(lifecycleOwner, liveData);
+    }
+
+    @UiThread
+    protected void getCachedNewsOnUI(LifecycleOwner lifecycleOwner, MutableLiveData<List<Article>> liveData) {
+        newsCacheDataSource.getAllNews().observe(lifecycleOwner, data -> {
+            // Set news from cache
+            liveData.setValue(data);
+
+            // We don't want to observe cached data anymore
+            liveData.removeObservers(lifecycleOwner);
+        });
     }
 }

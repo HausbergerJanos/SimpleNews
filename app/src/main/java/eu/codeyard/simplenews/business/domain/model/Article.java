@@ -1,5 +1,7 @@
 package eu.codeyard.simplenews.business.domain.model;
 
+import java.util.Objects;
+
 public class Article {
 
     private String title;
@@ -80,5 +82,49 @@ public class Article {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        try {
+            Article article = (Article) o;
+            return getTitle().equals(article.getTitle()) &&
+                    getDescription().equals(article.getDescription()) &&
+                    getUrl().equals(article.getUrl()) &&
+                    Objects.equals(getUrlToImage(), article.getUrlToImage()) &&
+                    getPublishedAt().equals(article.getPublishedAt()) &&
+                    Objects.equals(getSource(), article.getSource());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                getTitle(),
+                getDescription(),
+                getUrl(),
+                getUrlToImage(),
+                getPublishedAt(),
+                getSource()
+        );
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", urlToImage='" + urlToImage + '\'' +
+                ", publishedAt=" + publishedAt +
+                ", source='" + source + '\'' +
+                ", author='" + author + '\'' +
+                '}';
     }
 }

@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -22,14 +24,17 @@ import java.util.List;
 import eu.codeyard.simplenews.R;
 import eu.codeyard.simplenews.business.domain.model.Article;
 
+import static androidx.recyclerview.widget.RecyclerView.*;
+
 @SuppressLint("NonConstantResourceId")
 @EFragment(R.layout.fragment_news)
 public class NewsFragment extends Fragment {
 
     @ViewById
-    protected TextView newsTitle;
+    protected RecyclerView newsRecyclerView;
 
     private NewsViewModel newsViewModel;
+    private NewsAdapter newsAdapter;
 
     @Nullable
     @Override
@@ -41,19 +46,29 @@ public class NewsFragment extends Fragment {
 
     @AfterViews
     protected void init() {
-        newsViewModel.getText().observe(getViewLifecycleOwner(), s -> newsTitle.setText(s));
+        newsAdapter = new NewsAdapter();
+
+        initRecyclerView();
+
         newsViewModel.getArticles().observe(getViewLifecycleOwner(), this::handleNews);
     }
 
     public void handleNews(List<Article> articles) {
         if (articles != null && !articles.isEmpty()) {
-            newsTitle.setText(articles.get(2).getTitle());
+            newsAdapter.submitList(articles);
         }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        newsViewModel.getNewsFromCache(getViewLifecycleOwner());
+        newsViewModel.syncNews(getViewLifecycleOwner());
+    }
+
+    private void initRecyclerView() {
+        LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        newsRecyclerView.setLayoutManager(layoutManager);
+
+        newsRecyclerView.setAdapter(newsAdapter);
     }
 }
