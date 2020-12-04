@@ -52,7 +52,7 @@ public class SyncNewsInteractor {
             newsCacheData.removeObservers(lifecycleOwner);
 
             // Fetch news from network
-            //getNewsFromNetwork(lifecycleOwner, articles);
+            getNewsFromNetwork(lifecycleOwner, articles);
         });
 
         return articles;
@@ -60,9 +60,6 @@ public class SyncNewsInteractor {
 
     private void getNewsFromNetwork(LifecycleOwner lifecycleOwner, MutableLiveData<List<Article>> liveData) {
         newsNetworkDataSource.getTopNews().observe(lifecycleOwner, articles -> {
-            // Set news from network
-            liveData.setValue(articles);
-
             // Update cache with news from the network
             insertArticles(lifecycleOwner, liveData);
         });
