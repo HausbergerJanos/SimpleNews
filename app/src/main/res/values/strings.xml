@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">SimpleNews</string>
-    <string name="title_news">News</string>
-    <string name="title_favourites">Favourites</string>
-    <string name="title_profile">Profile</string>
+
+    <string name="title_news">Hírek</string>
+    <string name="title_bookmark">Könyvjelző</string>
+    <string name="title_more">Továbbiak</string>
+
+    <string name="read_news_button">Elolvasom a cikket!</string>
+    <string name="empty_bookmark_text">Még nem adtál hozzá könyvelzőt egyetlen hírhez sem!</string>
+
+    <string name="search_hint">Keresés…</string>
+    <string name="empty_search_result">Sajnos nem találtunk ilyen hírt :(</string>
 </resources>

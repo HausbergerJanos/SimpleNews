@@ -11,4 +11,10 @@ public interface NewsCacheDataSource {
     void insert(Article article);
 
     LiveData<List<Article>> getAllNews();
+
+    LiveData<List<Article>> searchInNews(String key);
+
+    LiveData<List<Article>> getAllBookmarkedNews();
+
+    void updateNewsBookmarkedState(String title, boolean isBookmarked);
 }

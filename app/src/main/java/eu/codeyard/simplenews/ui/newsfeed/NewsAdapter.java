@@ -70,5 +70,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public interface Interaction {
         void onItemSelected(Article article);
+        void onItemBookmarked(Article article);
     }
 }

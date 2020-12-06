@@ -14,7 +14,7 @@ import android.widget.ImageView;
 public class AnimationUtils {
 
     private static final int FAST_ANIM_TIME = 150;
-    private static final int NORMAL_ANIM_TIME = 500;
+    private static final int NORMAL_ANIM_TIME = 300;
 
     private AnimationUtils() {}
 

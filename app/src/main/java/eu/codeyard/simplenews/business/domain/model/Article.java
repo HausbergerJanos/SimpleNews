@@ -19,7 +19,9 @@ public class Article implements Serializable {
 
     private String author;
 
-    public Article(String title, String description, String url, String urlToImage, Long publishedAt, String source, String author) {
+    private boolean isBookmarked;
+
+    public Article(String title, String description, String url, String urlToImage, Long publishedAt, String source, String author, boolean isBookmarked) {
         this.title = title;
         this.description = description;
         this.url = url;
@@ -27,6 +29,7 @@ public class Article implements Serializable {
         this.publishedAt = publishedAt;
         this.source = source;
         this.author = author;
+        this.isBookmarked = isBookmarked;
     }
 
     public String getTitle() {
@@ -85,6 +88,14 @@ public class Article implements Serializable {
         this.author = author;
     }
 
+    public boolean isBookmarked() {
+        return isBookmarked;
+    }
+
+    public void setBookmarked(boolean bookmarked) {
+        isBookmarked = bookmarked;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,7 +107,8 @@ public class Article implements Serializable {
                     getUrl().equals(article.getUrl()) &&
                     Objects.equals(getUrlToImage(), article.getUrlToImage()) &&
                     getPublishedAt().equals(article.getPublishedAt()) &&
-                    Objects.equals(getSource(), article.getSource());
+                    Objects.equals(getSource(), article.getSource()) &&
+                    isBookmarked() == article.isBookmarked();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,7 +124,8 @@ public class Article implements Serializable {
                 getUrl(),
                 getUrlToImage(),
                 getPublishedAt(),
-                getSource()
+                getSource(),
+                isBookmarked()
         );
     }
 
@@ -126,6 +139,7 @@ public class Article implements Serializable {
                 ", publishedAt=" + publishedAt +
                 ", source='" + source + '\'' +
                 ", author='" + author + '\'' +
+                ", isFavourite=" + isBookmarked +
                 '}';
     }
 }

@@ -2,6 +2,9 @@ package eu.codeyard.simplenews.ui.titlebar;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
@@ -59,6 +63,28 @@ public class TitleBarFragment extends Fragment {
         subscribeObservers();
     }
 
+    @AfterViews
+    protected void init() {
+        searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (titleBarViewModel != null) {
+                    titleBarViewModel.setSearchKeys(charSequence.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
     private void subscribeObservers() {
         titleBarViewModel.getTitleBarPageState().observe(getViewLifecycleOwner(), this::handleTitleBarState);
     }
@@ -78,11 +104,19 @@ public class TitleBarFragment extends Fragment {
             case DETAILS:
                 titleBarVisibilityState = GONE;
                 searchIconVisible = false;
+                if (titleBarViewModel.isSearchViewVisible()) {
+                    titleBarViewModel.setShouldPersistSearchResult(true);
+                }
                 break;
             case MORE:
                 titleText = getResources().getString(R.string.title_more);
                 searchIconVisible = false;
+                titleBarViewModel.setShouldPersistSearchResult(false);
                 break;
+        }
+
+        if (titleBarViewModel.isSearchViewVisible()) {
+            closeSearchView(!titleBarViewModel.shouldPersistSearchResult());
         }
 
         title.setText(titleText);
@@ -90,8 +124,8 @@ public class TitleBarFragment extends Fragment {
 
         titleBarViewModel.setTitleBarVisibilityState(titleBarVisibilityState);
 
-        if (titleBarViewModel.isSearchViewVisible()) {
-            closeSearchView();
+        if (!titleBarPageState.equals(TitleBarPageState.DETAILS)) {
+            titleBarViewModel.setShouldPersistSearchResult(false);
         }
     }
 
@@ -109,14 +143,19 @@ public class TitleBarFragment extends Fragment {
         }
     }
 
-    private void closeSearchView() {
+    private void closeSearchView(boolean clear) {
         if (isAdded()) {
-            motionContainer.transitionToStart();
-            hideKeyboard();
-            searchText.clearFocus();
+            if (clear) {
+                motionContainer.transitionToStart();
+                titleBarViewModel.setSearchViewVisible(false);
+                titleBarViewModel.setTitleBarVisibilityState(VISIBLE);
+                titleBarViewModel.setShouldPersistSearchResult(false);
 
-            titleBarViewModel.setSearchViewVisible(false);
-            //titleBarViewModel.setTitleBarVisibilityState(VISIBLE);
+                searchText.setText("");
+            }
+
+            searchText.clearFocus();
+            hideKeyboard();
         }
     }
 
@@ -124,7 +163,7 @@ public class TitleBarFragment extends Fragment {
     protected void onSearchClick() {
         if (isAdded()) {
             titleBarViewModel.setSearchViewVisible(true);
-            //titleBarViewModel.setTitleBarVisibilityState(SEARCH);
+            titleBarViewModel.setTitleBarVisibilityState(SEARCH);
 
             motionContainer.setTransition(R.id.searchTrans);
             motionContainer.transitionToEnd();
@@ -137,7 +176,7 @@ public class TitleBarFragment extends Fragment {
     @Click(R.id.icClose)
     protected void onSearchCloseClick() {
         if (isAdded()) {
-            closeSearchView();
+            closeSearchView(true);
         }
     }
 }

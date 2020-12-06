@@ -1,14 +1,14 @@
-package eu.codeyard.simplenews.ui.profile;
+package eu.codeyard.simplenews.ui.more;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ProfileViewModel extends ViewModel {
+public class MoreViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ProfileViewModel() {
+    public MoreViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is profile fragment");
     }

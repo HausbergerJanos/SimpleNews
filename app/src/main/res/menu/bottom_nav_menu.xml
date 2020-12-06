@@ -7,13 +7,13 @@
         android:title="@string/title_news" />
 
     <item
-        android:id="@+id/navigation_favourites"
+        android:id="@+id/navigation_bookmarked"
         android:icon="@drawable/ic_bookmark_filled"
-        android:title="@string/title_favourites" />
+        android:title="@string/title_bookmark" />
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile"
-        android:title="@string/title_profile" />
+        android:title="@string/title_more" />
 
 </menu>

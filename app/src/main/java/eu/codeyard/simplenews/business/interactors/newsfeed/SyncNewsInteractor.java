@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.business.interactors;
+package eu.codeyard.simplenews.business.interactors.newsfeed;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -40,10 +40,10 @@ public class SyncNewsInteractor {
         // Init LiveData which will be updated first from cache and after that from network
         MutableLiveData<List<Article>> articles = new MutableLiveData<>();
 
-        // Get cache data source
+        // Get cached data source
         LiveData<List<Article>> newsCacheData = newsCacheDataSource.getAllNews();
 
-        // Observe cache data
+        // Observe cached data
         newsCacheData.observe(lifecycleOwner, data -> {
             // Set news from cache
             articles.setValue(data);
@@ -61,13 +61,13 @@ public class SyncNewsInteractor {
     private void getNewsFromNetwork(LifecycleOwner lifecycleOwner, MutableLiveData<List<Article>> liveData) {
         newsNetworkDataSource.getTopNews().observe(lifecycleOwner, articles -> {
             // Update cache with news from the network
-            insertArticles(lifecycleOwner, liveData);
+            insertArticles(lifecycleOwner, articles, liveData);
         });
     }
 
     @Background
-    protected void insertArticles(LifecycleOwner lifecycleOwner, MutableLiveData<List<Article>> liveData) {
-        for (Article article : Objects.requireNonNull(liveData.getValue())) {
+    protected void insertArticles(LifecycleOwner lifecycleOwner, List<Article> articlesFromNet, MutableLiveData<List<Article>> liveData) {
+        for (Article article : articlesFromNet) {
             newsCacheDataSource.insert(article);
         }
 

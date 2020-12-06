@@ -9,6 +9,13 @@
         <item name="android:windowBackground">@color/colorWindowBg</item>
     </style>
 
+    <style name="ActivityWithDarkActionBarTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="RegularText">
         <item name="android:fontFamily">@font/montserrat_regular</item>
     </style>
@@ -20,4 +27,6 @@
     <style name="LightText">
         <item name="android:fontFamily">@font/montserrat_light</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>

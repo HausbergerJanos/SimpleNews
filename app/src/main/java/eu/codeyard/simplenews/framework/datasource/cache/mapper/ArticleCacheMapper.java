@@ -18,7 +18,8 @@ public class ArticleCacheMapper implements EntityMapper<ArticleCacheEntity, Arti
                 articleCacheEntity.getUrlToImage(),
                 articleCacheEntity.getPublishedAt(),
                 articleCacheEntity.getSource(),
-                articleCacheEntity.getAuthor()
+                articleCacheEntity.getAuthor(),
+                articleCacheEntity.isBookmarked()
         );
     }
 
@@ -31,7 +32,8 @@ public class ArticleCacheMapper implements EntityMapper<ArticleCacheEntity, Arti
                 article.getUrlToImage(),
                 article.getPublishedAt(),
                 article.getSource(),
-                article.getAuthor()
+                article.getAuthor(),
+                article.isBookmarked()
         );
     }
 

@@ -90,4 +90,18 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         tools:text="2020-11-30" />
+
+    <ImageView
+        android:id="@+id/icBookmark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/margin_medium"
+        android:background="@drawable/bg_circle_translucent"
+        android:elevation="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/margin_xsmall"
+        app:srcCompat="@drawable/ic_bookmark" />
 </androidx.constraintlayout.widget.ConstraintLayout>

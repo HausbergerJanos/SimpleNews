@@ -21,10 +21,10 @@ public class ArticleCacheEntity {
     @ColumnInfo(name = "url")
     private String url;
 
-    @ColumnInfo(name = "urlToImage")
+    @ColumnInfo(name = "url_to_image")
     private String urlToImage;
 
-    @ColumnInfo(name = "publishedAt")
+    @ColumnInfo(name = "published_at")
     private Long publishedAt;
 
     @ColumnInfo(name = "source")
@@ -33,7 +33,10 @@ public class ArticleCacheEntity {
     @ColumnInfo(name = "author")
     private String author;
 
-    public ArticleCacheEntity(@NotNull String title, String description, String url, String urlToImage, Long publishedAt, String source, String author) {
+    @ColumnInfo(name = "is_bookmarked")
+    private boolean isBookmarked;
+
+    public ArticleCacheEntity(@NotNull String title, String description, String url, String urlToImage, Long publishedAt, String source, String author, boolean isBookmarked) {
         this.title = title;
         this.description = description;
         this.url = url;
@@ -41,6 +44,7 @@ public class ArticleCacheEntity {
         this.publishedAt = publishedAt;
         this.source = source;
         this.author = author;
+        this.isBookmarked = isBookmarked;
     }
 
     @NotNull
@@ -98,5 +102,13 @@ public class ArticleCacheEntity {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public boolean isBookmarked() {
+        return isBookmarked;
+    }
+
+    public void setBookmarked(boolean bookmarked) {
+        isBookmarked = bookmarked;
     }
 }

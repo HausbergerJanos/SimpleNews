@@ -2,7 +2,6 @@ package eu.codeyard.simplenews.ui.newsdetails;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,26 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.transition.Transition;
-import androidx.transition.TransitionInflater;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
-import org.w3c.dom.Text;
 
-import eu.codeyard.simplenews.NewsReaderActivity;
 import eu.codeyard.simplenews.NewsReaderActivity_;
 import eu.codeyard.simplenews.R;
 import eu.codeyard.simplenews.business.domain.model.Article;
 import eu.codeyard.simplenews.business.domain.util.DateUtil;
+import eu.codeyard.simplenews.ui.titlebar.TitleBarViewModel;
 import eu.codeyard.simplenews.ui.util.AnimationUtils;
+
+import static eu.codeyard.simplenews.ui.titlebar.TitleBarPageState.DETAILS;
 
 @EFragment(R.layout.fragment_news_details)
 public class NewsDetailsFragment extends Fragment {
@@ -61,6 +57,7 @@ public class NewsDetailsFragment extends Fragment {
     private Article article;
 
     private NewsDetailsViewModel newsDetailsViewModel;
+    private TitleBarViewModel titleBarViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +73,9 @@ public class NewsDetailsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         newsDetailsViewModel =
                 ViewModelProviders.of(this).get(NewsDetailsViewModel.class);
+
+        titleBarViewModel =
+                ViewModelProviders.of(getActivity()).get(TitleBarViewModel.class);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -98,6 +98,16 @@ public class NewsDetailsFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        setUpTitleBar();
+    }
+
+    private void setUpTitleBar() {
+        titleBarViewModel.setTitleBarPageState(DETAILS);
+    }
+
     @Click(R.id.readNewsButton)
     public void onReadNewsClicked() {
         if (isAdded() && getContext() != null && getActivity() != null) {
@@ -112,7 +122,7 @@ public class NewsDetailsFragment extends Fragment {
     public void onBookmarkClicked() {
         if (isAdded() && getContext() != null) {
             article.setBookmarked(!article.isBookmarked());
-            
+
             newsDetailsViewModel.updateNewsBookmarkedState(article.getTitle(), article.isBookmarked());
 
             Drawable bookmarkIcon = ContextCompat.getDrawable(getContext(),

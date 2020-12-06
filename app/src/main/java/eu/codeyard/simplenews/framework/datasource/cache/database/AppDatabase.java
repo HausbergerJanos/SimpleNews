@@ -40,5 +40,5 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    public abstract ArticlesDao getArticlesDao();
+    public abstract NewsDao getArticlesDao();
 }

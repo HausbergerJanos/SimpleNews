@@ -20,7 +20,8 @@ public class ArticleNetworkMapper implements EntityMapper<ArticleDTO, Article> {
                 articleDTO.getUrlToImage(),
                 DateUtil.convertTimeToMilliSec(articleDTO.getPublishedAt()),
                 articleDTO.getSource() != null ? articleDTO.getSource().getName() : "",
-                articleDTO.getAuthor()
+                articleDTO.getAuthor(),
+                false
         );
     }
 

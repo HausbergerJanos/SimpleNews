@@ -1,15 +1,20 @@
 package eu.codeyard.simplenews.ui.newsfeed;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.w3c.dom.Text;
@@ -17,6 +22,7 @@ import org.w3c.dom.Text;
 import eu.codeyard.simplenews.R;
 import eu.codeyard.simplenews.business.domain.model.Article;
 import eu.codeyard.simplenews.business.domain.util.DateUtil;
+import eu.codeyard.simplenews.ui.util.AnimationUtils;
 
 import static eu.codeyard.simplenews.ui.newsfeed.NewsAdapter.*;
 import static kotlin.io.ConstantsKt.DEFAULT_BUFFER_SIZE;
@@ -30,6 +36,8 @@ class NewsFeedItemView extends RecyclerView.ViewHolder {
     private TextView title;
     private TextView source;
     private TextView publishedAt;
+
+    private ImageView icBookmark;
 
     private RoundedImageView coverImage;
 
@@ -45,12 +53,23 @@ class NewsFeedItemView extends RecyclerView.ViewHolder {
         publishedAt = itemView.findViewById(R.id.publishedAt);
 
         coverImage = itemView.findViewById(R.id.coverImage);
+        icBookmark = itemView.findViewById(R.id.icBookmark);
 
         cardView = itemView.findViewById(R.id.cardView);
 
         cardView.setOnClickListener(view -> {
             if (interaction != null) {
                 interaction.onItemSelected(article);
+            }
+        });
+
+        icBookmark.setOnClickListener(view -> {
+            if (interaction != null) {
+                interaction.onItemBookmarked(article);
+                article.setBookmarked(!article.isBookmarked());
+                Drawable bookmarkIcon = ContextCompat.getDrawable(itemView.getContext(),
+                        article.isBookmarked() ? R.drawable.ic_bookmark_filled : R.drawable.ic_bookmark);
+                AnimationUtils.swapImage(icBookmark, bookmarkIcon);
             }
         });
     }
@@ -61,9 +80,11 @@ class NewsFeedItemView extends RecyclerView.ViewHolder {
         source.setText(article.getSource());
         publishedAt.setText(DateUtil.convertMilliSecToTimeOnCard(article.getPublishedAt()));
 
+        icBookmark.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(),
+                article.isBookmarked() ? R.drawable.ic_bookmark_filled : R.drawable.ic_bookmark));
+
         Glide.with(itemView)
                 .load(article.getUrlToImage())
-                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(coverImage);
     }
 }

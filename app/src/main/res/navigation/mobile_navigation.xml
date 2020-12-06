@@ -13,26 +13,34 @@
         <action
             android:id="@+id/action_navigation_news_to_newsDetailsFragment_"
             app:destination="@id/newsDetailsFragment_"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_enter_anim"
-            app:popExitAnim="@anim/nav_default_exit_anim" />
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_favourites"
-        android:name="eu.codeyard.simplenews.ui.favourites.FavouritesFragment_"
-        android:label="@string/title_favourites"
-        tools:layout="@layout/fragment_favourites" />
+        android:id="@+id/navigation_bookmarked"
+        android:name="eu.codeyard.simplenews.ui.bookmarked.BookmarkedNewsListFragment_"
+        android:label="@string/title_bookmark"
+        tools:layout="@layout/fragment_bookmarked_news_list" >
+        <action
+            android:id="@+id/action_navigation_bookmarked_to_newsDetailsFragment_"
+            app:destination="@id/newsDetailsFragment_"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="eu.codeyard.simplenews.ui.profile.ProfileFragment_"
-        android:label="@string/title_profile"
+        android:name="eu.codeyard.simplenews.ui.more.MoreFragment_"
+        android:label="@string/title_more"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/newsDetailsFragment_"
-        android:name="eu.codeyard.simplenews.ui.newsfeed.NewsDetailsFragment_"
+        android:name="eu.codeyard.simplenews.ui.newsdetails.NewsDetailsFragment_"
         tools:layout="@layout/fragment_news_details"
         android:label="NewsDetailsFragment_" />
 </navigation>

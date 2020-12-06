@@ -1,98 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/coverImage"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_dummy" />
+        android:paddingTop="80dp"
+        android:touchscreenBlocksFocus="true"
+        android:focusableInTouchMode="false"
+        android:fillViewport="true">
+        <!--        app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/descriptionDetail"
+            <TextView
+                android:id="@+id/descriptionDetail"
+                style="@style/LightText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="@dimen/text_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Some example" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loadingAnim"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:scaleType="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/descriptionDetail"
+                app:layout_constraintBottom_toTopOf="@id/readNewsButton"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_fileName="read_anim.json" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/readNewsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_large"
+                android:paddingTop="@dimen/margin_medium"
+                android:paddingBottom="@dimen/margin_medium"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:background="@drawable/button_selector"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="@dimen/text_small"
+                android:text="@string/read_news_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/LightText"
-        android:layout_marginStart="@dimen/margin_large"
-        android:layout_marginEnd="@dimen/margin_large"
-        tools:text="Some example"
-        android:textSize="@dimen/text_small"
-        android:textColor="@color/colorDarkGray"
-        android:layout_marginBottom="@dimen/margin_medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <TextView
-        android:id="@+id/detailsSource"
-        style="@style/RegularText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_large"
-        android:layout_marginBottom="@dimen/margin_medium"
-        tools:text="Index.hu"
-        android:textSize="@dimen/text_medium"
-        android:textColor="@color/colorGray"
-        app:layout_constraintBottom_toTopOf="@+id/descriptionDetail"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/descriptionPublishedAt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/RegularText"
-        tools:text="2020-11-30 11:03"
-        app:layout_constraintBottom_toTopOf="@+id/descriptionDetail"
-        android:layout_marginBottom="@dimen/margin_medium"
-        android:textColor="@color/colorGray"
-        android:layout_marginEnd="@dimen/margin_large"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/descriptionTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/BoldText"
-        android:layout_marginStart="@dimen/margin_large"
-        android:layout_marginEnd="@dimen/margin_large"
-        android:layout_marginBottom="@dimen/margin_large"
-        tools:text="Some very long headlines so that it start coming to next line and we can check"
-        android:textColor="@color/colorGray"
-        android:textSize="@dimen/text_large"
-        app:layout_constraintBottom_toTopOf="@+id/detailsSource"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813" />
+        <include layout="@layout/view_news_details_collapsing_header" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
-        android:id="@+id/ivBack"
+        android:id="@+id/icBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_circle_translucent"
         android:layout_margin="@dimen/margin_medium"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/bg_circle_translucent"
+        android:elevation="10dp"
         android:padding="@dimen/margin_small"
         app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/icBookmark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="@dimen/margin_medium"
+        android:background="@drawable/bg_circle_translucent"
+        android:elevation="10dp"
+        android:padding="@dimen/margin_small"
+        app:srcCompat="@drawable/ic_bookmark" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
