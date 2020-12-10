@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
@@ -17,6 +18,12 @@ public class AnimationUtils {
     private static final int NORMAL_ANIM_TIME = 300;
 
     private AnimationUtils() {}
+
+    public static void fadeInAnim(ViewGroup targetView) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(targetView, View.ALPHA, 0, 1f);
+        animator.setDuration(500);
+        animator.start();
+    }
 
     public static void animateContainerHeight(View targetView, int startHeight, int endHeight, AnimationListener animationListener) {
         ValueAnimator valueAnimator = ValueAnimator.ofInt(startHeight, endHeight);

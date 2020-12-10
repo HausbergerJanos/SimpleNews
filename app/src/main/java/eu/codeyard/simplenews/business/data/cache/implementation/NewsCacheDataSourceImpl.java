@@ -34,8 +34,8 @@ public class NewsCacheDataSourceImpl implements NewsCacheDataSource {
     }
 
     @Override
-    public LiveData<List<Article>> searchInNews(String key) {
-        return newsDaoService.searchInNews(key);
+    public LiveData<List<Article>> searchInNews(String query) {
+        return newsDaoService.searchInNews(query);
     }
 
     @Override

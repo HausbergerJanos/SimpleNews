@@ -2,6 +2,7 @@ package eu.codeyard.simplenews.framework.datasource.cache.implementation;
 
 import android.app.Application;
 
+import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
@@ -12,6 +13,7 @@ import eu.codeyard.simplenews.framework.datasource.cache.abstraction.NewsDaoServ
 import eu.codeyard.simplenews.framework.datasource.cache.database.AppDatabase;
 import eu.codeyard.simplenews.framework.datasource.cache.database.NewsDao;
 import eu.codeyard.simplenews.framework.datasource.cache.mapper.ArticleCacheMapper;
+import eu.codeyard.simplenews.framework.datasource.cache.model.ArticleCacheEntity;
 
 public class NewsDaoServiceImpl implements NewsDaoService {
 
@@ -47,8 +49,8 @@ public class NewsDaoServiceImpl implements NewsDaoService {
     }
 
     @Override
-    public LiveData<List<Article>> searchInNews(String key) {
-        return Transformations.map(newsDao.searchInNews(key), input ->
+    public LiveData<List<Article>> searchInNews(String query) {
+        return Transformations.map(newsDao.searchInNews(query), input ->
                 articleCacheMapper.mapFromEntityList(input));
     }
 

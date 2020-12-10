@@ -12,7 +12,7 @@ public interface NewsDaoService {
 
     LiveData<List<Article>> getAllNews();
 
-    LiveData<List<Article>> searchInNews(String key);
+    LiveData<List<Article>> searchInNews(String query);
 
     LiveData<List<Article>> getAllBookmarkedNews();
 

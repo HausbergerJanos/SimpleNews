@@ -8,7 +8,7 @@ public class TitleBarViewModel extends ViewModel {
 
     private MutableLiveData<TitleBarPageState> titleBarPageState;
     private MutableLiveData<TitleBarVisibilityState> titleBarVisibilityState;
-    private MutableLiveData<String> searchKeys;
+    private MutableLiveData<String> searchQuery;
 
     private boolean searchViewVisible;
     private boolean shouldPersistSearchResult;
@@ -16,7 +16,7 @@ public class TitleBarViewModel extends ViewModel {
     public TitleBarViewModel() {
         titleBarPageState = new MutableLiveData<>();
         titleBarVisibilityState = new MutableLiveData<>();
-        searchKeys = new MutableLiveData<>();
+        searchQuery = new MutableLiveData<>();
     }
 
     public void setTitleBarPageState(TitleBarPageState desiredTitleBarPageState) {
@@ -54,11 +54,11 @@ public class TitleBarViewModel extends ViewModel {
         this.shouldPersistSearchResult = shouldPersistSearchResult;
     }
 
-    public void setSearchKeys(String key) {
-        searchKeys.setValue(key);
+    public void setSearchQuery(String key) {
+        searchQuery.setValue(key);
     }
 
-    public LiveData<String> getSearchKeys() {
-        return searchKeys;
+    public LiveData<String> getSearchQuery() {
+        return searchQuery;
     }
 }

@@ -28,12 +28,12 @@ public class SearchNewsInteractor {
         newsCacheDataSource = new NewsCacheDataSourceImpl(app);
     }
 
-    public LiveData<List<Article>> searchInNews(LifecycleOwner lifecycleOwner, String key, boolean justBookmarked) {
+    public LiveData<List<Article>> searchInNews(LifecycleOwner lifecycleOwner, String query, boolean justBookmarked) {
         // Init LiveData which will be updated from cache
         MutableLiveData<List<Article>> articles = new MutableLiveData<>();
 
         // Get cache data source
-        LiveData<List<Article>> newsCacheData = newsCacheDataSource.searchInNews(key);
+        LiveData<List<Article>> newsCacheData = newsCacheDataSource.searchInNews(query);
 
         // Observe cached data
         newsCacheData.observe(lifecycleOwner, data -> {

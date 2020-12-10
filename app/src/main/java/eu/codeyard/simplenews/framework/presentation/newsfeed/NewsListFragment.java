@@ -71,7 +71,7 @@ public class NewsListFragment extends Fragment implements Interaction {
 
     private void subscribeObservers() {
         newsListViewModel.getArticles().observe(getViewLifecycleOwner(), this::handleNews);
-        titleBarViewModel.getSearchKeys().observe(getViewLifecycleOwner(), this::search);
+        titleBarViewModel.getSearchQuery().observe(getViewLifecycleOwner(), this::search);
     }
 
     public void handleNews(List<Article> articles) {

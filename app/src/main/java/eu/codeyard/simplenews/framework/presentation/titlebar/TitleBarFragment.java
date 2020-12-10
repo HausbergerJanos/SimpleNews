@@ -73,7 +73,7 @@ public class TitleBarFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (titleBarViewModel != null) {
-                    titleBarViewModel.setSearchKeys(charSequence.toString());
+                    titleBarViewModel.setSearchQuery(charSequence.toString());
                 }
             }
 

@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
@@ -86,6 +88,7 @@ public class BookmarkedNewsListFragment extends Fragment implements Interaction 
     public void onStart() {
         super.onStart();
         setUpTitleBar();
+
         bookmarkedNewsListViewModel.getAllBookmarkedNews(getViewLifecycleOwner());
     }
 
@@ -101,18 +104,45 @@ public class BookmarkedNewsListFragment extends Fragment implements Interaction 
 
     private void handleEmptyScreen(boolean isEmpty) {
         if (isAdded()) {
-            if (isEmpty) {
-                if (emptyTitle.getVisibility() != View.VISIBLE) {
-                    emptyTitle.setVisibility(View.VISIBLE);
-                    emptyAnim.playAnimation();
-                    emptyAnim.setVisibility(View.VISIBLE);
-                }
+            if (titleBarViewModel.isSearchViewVisible()) {
+                handleEmptySearchScreen(isEmpty);
             } else {
-                if (emptyTitle.getVisibility() != View.GONE) {
-                    emptyTitle.setVisibility(View.GONE);
-                    emptyAnim.pauseAnimation();
-                    emptyAnim.setVisibility(View.GONE);
-                }
+                handleEmptyBookmarkScreen(isEmpty);
+            }
+        }
+    }
+
+    private void handleEmptySearchScreen(boolean isEmpty) {
+        if (isEmpty) {
+            if (emptyTitle.getVisibility() != View.VISIBLE) {
+                emptyTitle.setText(getResources().getString(R.string.empty_search_result));
+                emptyTitle.setVisibility(View.VISIBLE);
+
+                emptyAnim.setAnimation("empty_anim.json");
+                emptyAnim.playAnimation();
+                emptyAnim.setVisibility(View.VISIBLE);
+            }
+        } else {
+            if (emptyTitle.getVisibility() != View.GONE) {
+                emptyTitle.setVisibility(View.GONE);
+                emptyAnim.pauseAnimation();
+                emptyAnim.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void handleEmptyBookmarkScreen(boolean isEmpty) {
+        if (isEmpty) {
+            if (emptyTitle.getVisibility() != View.VISIBLE) {
+                emptyTitle.setVisibility(View.VISIBLE);
+                emptyAnim.playAnimation();
+                emptyAnim.setVisibility(View.VISIBLE);
+            }
+        } else {
+            if (emptyTitle.getVisibility() != View.GONE) {
+                emptyTitle.setVisibility(View.GONE);
+                emptyAnim.pauseAnimation();
+                emptyAnim.setVisibility(View.GONE);
             }
         }
     }

@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     @ViewById
     protected FrameLayout titleBarContainer;
 
+    @ViewById
+    protected ConstraintLayout container;
+
     private TitleBarViewModel titleBarViewModel;
 
     @Override
@@ -46,11 +50,15 @@ public class MainActivity extends AppCompatActivity {
     private void setTitleBar() {
         TitleBarFragment titleBarFragment = TitleBarFragment_.builder().build();
 
+        titleBarContainer.setAlpha(0);
+
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.titleBarContainer, titleBarFragment)
                 .commitAllowingStateLoss();
 
         titleBarViewModel = ViewModelProviders.of(this).get(TitleBarViewModel.class);
+
+        AnimationUtils.fadeInAnim(titleBarContainer);
     }
 
     private void subscribeObservers() {
