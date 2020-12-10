@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.more;
+package eu.codeyard.simplenews.framework.presentation.more;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

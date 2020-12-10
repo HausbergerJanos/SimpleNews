@@ -1,10 +1,9 @@
-package eu.codeyard.simplenews.ui.titlebar;
+package eu.codeyard.simplenews.framework.presentation.titlebar;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ import org.androidannotations.annotations.ViewById;
 
 import eu.codeyard.simplenews.R;
 
-import static eu.codeyard.simplenews.ui.titlebar.TitleBarVisibilityState.*;
+import static eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarVisibilityState.*;
 
 @EFragment(R.layout.fragment_title_bar)
 public class TitleBarFragment extends Fragment {

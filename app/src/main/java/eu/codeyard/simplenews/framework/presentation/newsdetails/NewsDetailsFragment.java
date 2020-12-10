@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.newsdetails;
+package eu.codeyard.simplenews.framework.presentation.newsdetails;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,10 +25,10 @@ import eu.codeyard.simplenews.NewsReaderActivity_;
 import eu.codeyard.simplenews.R;
 import eu.codeyard.simplenews.business.domain.model.Article;
 import eu.codeyard.simplenews.business.domain.util.DateUtil;
-import eu.codeyard.simplenews.ui.titlebar.TitleBarViewModel;
-import eu.codeyard.simplenews.ui.util.AnimationUtils;
+import eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarViewModel;
+import eu.codeyard.simplenews.framework.presentation.util.AnimationUtils;
 
-import static eu.codeyard.simplenews.ui.titlebar.TitleBarPageState.DETAILS;
+import static eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarPageState.DETAILS;
 
 @EFragment(R.layout.fragment_news_details)
 public class NewsDetailsFragment extends Fragment {

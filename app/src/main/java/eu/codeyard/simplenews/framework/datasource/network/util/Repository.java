@@ -1,13 +1,13 @@
-package eu.codeyard.simplenews.network;
+package eu.codeyard.simplenews.framework.datasource.network.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import eu.codeyard.simplenews.business.domain.model.Article;
+import eu.codeyard.simplenews.framework.presentation.util.Constants;
+import eu.codeyard.simplenews.framework.datasource.network.util.DateDeserializer;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

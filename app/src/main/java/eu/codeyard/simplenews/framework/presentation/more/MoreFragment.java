@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.more;
+package eu.codeyard.simplenews.framework.presentation.more;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -18,9 +18,9 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import eu.codeyard.simplenews.R;
-import eu.codeyard.simplenews.ui.titlebar.TitleBarViewModel;
+import eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarViewModel;
 
-import static eu.codeyard.simplenews.ui.titlebar.TitleBarPageState.MORE;
+import static eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarPageState.MORE;
 
 @SuppressLint("NonConstantResourceId")
 @EFragment(R.layout.fragment_profile)

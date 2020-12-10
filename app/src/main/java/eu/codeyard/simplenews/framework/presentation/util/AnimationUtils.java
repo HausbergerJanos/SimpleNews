@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.util;
+package eu.codeyard.simplenews.framework.presentation.util;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

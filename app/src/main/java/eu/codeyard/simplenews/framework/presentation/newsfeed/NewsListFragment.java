@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.newsfeed;
+package eu.codeyard.simplenews.framework.presentation.newsfeed;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,15 +25,16 @@ import java.util.List;
 
 import eu.codeyard.simplenews.R;
 import eu.codeyard.simplenews.business.domain.model.Article;
-import eu.codeyard.simplenews.ui.titlebar.TitleBarViewModel;
+import eu.codeyard.simplenews.framework.presentation.common.NewsAdapter;
+import eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarViewModel;
 
 import static androidx.recyclerview.widget.RecyclerView.*;
-import static eu.codeyard.simplenews.ui.newsfeed.NewsAdapter.*;
-import static eu.codeyard.simplenews.ui.titlebar.TitleBarPageState.*;
+import static eu.codeyard.simplenews.framework.presentation.common.NewsAdapter.*;
+import static eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarPageState.*;
 
 @SuppressLint("NonConstantResourceId")
-@EFragment(R.layout.fragment_news)
-public class NewsFragment extends Fragment implements Interaction {
+@EFragment(R.layout.fragment_news_list)
+public class NewsListFragment extends Fragment implements Interaction {
 
     @ViewById
     protected RecyclerView newsRecyclerView;
@@ -45,7 +45,7 @@ public class NewsFragment extends Fragment implements Interaction {
     @ViewById
     protected LottieAnimationView emptyAnim;
 
-    private NewsViewModel newsViewModel;
+    private NewsListViewModel newsListViewModel;
     private TitleBarViewModel titleBarViewModel;
 
     private NewsAdapter newsAdapter;
@@ -53,8 +53,8 @@ public class NewsFragment extends Fragment implements Interaction {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        newsViewModel =
-                ViewModelProviders.of(this).get(NewsViewModel.class);
+        newsListViewModel =
+                ViewModelProviders.of(this).get(NewsListViewModel.class);
 
         titleBarViewModel =
                 ViewModelProviders.of(getActivity()).get(TitleBarViewModel.class);
@@ -70,7 +70,7 @@ public class NewsFragment extends Fragment implements Interaction {
     }
 
     private void subscribeObservers() {
-        newsViewModel.getArticles().observe(getViewLifecycleOwner(), this::handleNews);
+        newsListViewModel.getArticles().observe(getViewLifecycleOwner(), this::handleNews);
         titleBarViewModel.getSearchKeys().observe(getViewLifecycleOwner(), this::search);
     }
 
@@ -82,7 +82,7 @@ public class NewsFragment extends Fragment implements Interaction {
     }
 
     private void search(String key) {
-        newsViewModel.searchNews(getViewLifecycleOwner(), key);
+        newsListViewModel.searchNews(getViewLifecycleOwner(), key);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class NewsFragment extends Fragment implements Interaction {
         setUpTitleBar();
 
         if (!titleBarViewModel.isSearchViewVisible()) {
-            newsViewModel.syncNews(getViewLifecycleOwner());
+            newsListViewModel.syncNews(getViewLifecycleOwner());
         }
     }
 
@@ -129,7 +129,7 @@ public class NewsFragment extends Fragment implements Interaction {
             Bundle bundle = new Bundle();
             bundle.putSerializable("article", article);
 
-            NavHostFragment.findNavController(NewsFragment.this)
+            NavHostFragment.findNavController(NewsListFragment.this)
                     .navigate(R.id.action_navigation_news_to_newsDetailsFragment_, bundle);
         }
     }
@@ -137,7 +137,7 @@ public class NewsFragment extends Fragment implements Interaction {
     @Override
     public void onItemBookmarked(Article article) {
         if (isAdded() && article != null) {
-            newsViewModel.updateNewsBookmarkedState(article.getTitle(), !article.isBookmarked());
+            newsListViewModel.updateNewsBookmarkedState(article.getTitle(), !article.isBookmarked());
         }
     }
 }

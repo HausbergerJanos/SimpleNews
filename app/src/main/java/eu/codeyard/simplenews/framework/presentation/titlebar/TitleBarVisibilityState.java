@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.titlebar;
+package eu.codeyard.simplenews.framework.presentation.titlebar;
 
 public enum  TitleBarVisibilityState {
     VISIBLE, GONE, SEARCH

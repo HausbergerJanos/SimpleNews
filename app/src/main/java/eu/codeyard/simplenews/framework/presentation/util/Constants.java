@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.network;
+package eu.codeyard.simplenews.framework.presentation.util;
 
 public class Constants {
 

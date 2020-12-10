@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<eu.codeyard.simplenews.ui.util.CollapsibleToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<eu.codeyard.simplenews.framework.presentation.util.CollapsibleToolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motionLayout"
@@ -91,4 +91,4 @@
         android:textColor="@color/colorGray"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:text="Ez egy teszt ez egy teszt ez egy tesuzt" />
-</eu.codeyard.simplenews.ui.util.CollapsibleToolbar>
+</eu.codeyard.simplenews.framework.presentation.util.CollapsibleToolbar>

@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.bookmarked;
+package eu.codeyard.simplenews.framework.presentation.bookmarked;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -26,11 +26,11 @@ import java.util.List;
 
 import eu.codeyard.simplenews.R;
 import eu.codeyard.simplenews.business.domain.model.Article;
-import eu.codeyard.simplenews.ui.newsfeed.NewsAdapter;
-import eu.codeyard.simplenews.ui.titlebar.TitleBarViewModel;
+import eu.codeyard.simplenews.framework.presentation.common.NewsAdapter;
+import eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarViewModel;
 
-import static eu.codeyard.simplenews.ui.newsfeed.NewsAdapter.*;
-import static eu.codeyard.simplenews.ui.titlebar.TitleBarPageState.BOOKMARK;
+import static eu.codeyard.simplenews.framework.presentation.common.NewsAdapter.*;
+import static eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarPageState.BOOKMARK;
 
 @SuppressLint("NonConstantResourceId")
 @EFragment(R.layout.fragment_bookmarked_news_list)

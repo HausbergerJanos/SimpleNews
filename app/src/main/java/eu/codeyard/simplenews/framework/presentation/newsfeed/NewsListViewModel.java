@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.newsfeed;
+package eu.codeyard.simplenews.framework.presentation.newsfeed;
 
 import android.app.Application;
 
@@ -19,7 +19,7 @@ import eu.codeyard.simplenews.business.interactors.common.UpdateBookmarkedStateI
 import eu.codeyard.simplenews.business.interactors.newsfeed.SyncNewsInteractor;
 import eu.codeyard.simplenews.business.interactors.newsfeed.SyncNewsInteractor_;
 
-public class NewsViewModel extends AndroidViewModel {
+public class NewsListViewModel extends AndroidViewModel {
 
     private SyncNewsInteractor syncNewsInteractor;
     private UpdateBookmarkedStateInteractor updateBookmarkedStateInteractor;
@@ -27,7 +27,7 @@ public class NewsViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Article>> articles;
 
-    public NewsViewModel(@NonNull Application application) {
+    public NewsListViewModel(@NonNull Application application) {
         super(application);
 
         syncNewsInteractor = SyncNewsInteractor_.getInstance_(application);

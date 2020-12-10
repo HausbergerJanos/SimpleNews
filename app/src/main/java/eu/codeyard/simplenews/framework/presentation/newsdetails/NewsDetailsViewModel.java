@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.newsdetails;
+package eu.codeyard.simplenews.framework.presentation.newsdetails;
 
 import android.app.Application;
 

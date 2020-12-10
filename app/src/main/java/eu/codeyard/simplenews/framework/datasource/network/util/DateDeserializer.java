@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.network;
+package eu.codeyard.simplenews.framework.datasource.network.util;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

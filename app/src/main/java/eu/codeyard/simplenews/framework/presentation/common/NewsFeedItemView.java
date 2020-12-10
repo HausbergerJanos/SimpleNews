@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.newsfeed;
+package eu.codeyard.simplenews.framework.presentation.common;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -11,23 +11,16 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
-
-import org.w3c.dom.Text;
 
 import eu.codeyard.simplenews.R;
 import eu.codeyard.simplenews.business.domain.model.Article;
 import eu.codeyard.simplenews.business.domain.util.DateUtil;
-import eu.codeyard.simplenews.ui.util.AnimationUtils;
+import eu.codeyard.simplenews.framework.presentation.util.AnimationUtils;
 
-import static eu.codeyard.simplenews.ui.newsfeed.NewsAdapter.*;
-import static kotlin.io.ConstantsKt.DEFAULT_BUFFER_SIZE;
+import static eu.codeyard.simplenews.framework.presentation.common.NewsAdapter.*;
 
-class NewsFeedItemView extends RecyclerView.ViewHolder {
+public class NewsFeedItemView extends RecyclerView.ViewHolder {
 
     private Article article;
 

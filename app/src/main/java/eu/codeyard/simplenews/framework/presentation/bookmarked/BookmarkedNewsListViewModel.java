@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.bookmarked;
+package eu.codeyard.simplenews.framework.presentation.bookmarked;
 
 import android.app.Application;
 

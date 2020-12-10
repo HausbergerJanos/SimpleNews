@@ -12,7 +12,7 @@ import eu.codeyard.simplenews.framework.datasource.network.abstraction.NewsRepos
 import eu.codeyard.simplenews.framework.datasource.network.api.NewsAPIService;
 import eu.codeyard.simplenews.framework.datasource.network.mapper.ArticleNetworkMapper;
 import eu.codeyard.simplenews.framework.datasource.network.model.NewsDTO;
-import eu.codeyard.simplenews.network.Repository;
+import eu.codeyard.simplenews.framework.datasource.network.util.Repository;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

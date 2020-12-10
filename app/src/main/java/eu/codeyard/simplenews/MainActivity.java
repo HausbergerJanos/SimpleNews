@@ -15,11 +15,11 @@ import androidx.navigation.ui.NavigationUI;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import eu.codeyard.simplenews.ui.titlebar.TitleBarFragment;
-import eu.codeyard.simplenews.ui.titlebar.TitleBarFragment_;
-import eu.codeyard.simplenews.ui.titlebar.TitleBarViewModel;
-import eu.codeyard.simplenews.ui.titlebar.TitleBarVisibilityState;
-import eu.codeyard.simplenews.ui.util.AnimationUtils;
+import eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarFragment;
+import eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarFragment_;
+import eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarViewModel;
+import eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarVisibilityState;
+import eu.codeyard.simplenews.framework.presentation.util.AnimationUtils;
 
 @EActivity
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package eu.codeyard.simplenews.ui.util;
+package eu.codeyard.simplenews.framework.presentation.util;
 
 import android.content.Context;
 import android.util.AttributeSet;
