@@ -120,10 +120,12 @@
         motion:constraintSetStart="@+id/start"
         motion:duration="300"
         motion:motionInterpolator="linear">
+
         <OnSwipe
             motion:dragDirection="dragUp"
             motion:touchAnchorId="@+id/coverImage"
             motion:touchAnchorSide="bottom"/>
+
         <KeyFrameSet >
             <KeyAttribute
                 motion:motionTarget="@+id/closedTitle"

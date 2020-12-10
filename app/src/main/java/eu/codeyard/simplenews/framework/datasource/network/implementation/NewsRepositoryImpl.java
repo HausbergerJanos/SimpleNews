@@ -13,6 +13,7 @@ import eu.codeyard.simplenews.framework.datasource.network.api.NewsAPIService;
 import eu.codeyard.simplenews.framework.datasource.network.mapper.ArticleNetworkMapper;
 import eu.codeyard.simplenews.framework.datasource.network.model.NewsDTO;
 import eu.codeyard.simplenews.framework.datasource.network.util.Repository;
+import eu.codeyard.simplenews.framework.presentation.util.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +37,7 @@ public class NewsRepositoryImpl extends Repository implements NewsRepository {
     @Override
     public LiveData<List<Article>> getTopNews() {
         MutableLiveData<List<Article>> newsData = new MutableLiveData<>();
-        newsAPIService.getTopNews("hu", "df0796c1dec749f8a7296e59a2e4a1cd").enqueue(new Callback<NewsDTO>() {
+        newsAPIService.getTopNews(Constants.NEWS_LANGUAGE_CODE, Constants.NEWS_API_KEY).enqueue(new Callback<NewsDTO>() {
             @Override
             public void onResponse(@NotNull Call<NewsDTO> call, @NotNull Response<NewsDTO> response) {
                 if (response.body() != null) {

@@ -9,10 +9,10 @@
         android:id="@+id/navigation_news"
         android:name="eu.codeyard.simplenews.framework.presentation.newsfeed.NewsListFragment_"
         android:label="@string/title_news"
-        tools:layout="@layout/fragment_news_list" >
+        tools:layout="@layout/fragment_news_list">
         <action
             android:id="@+id/action_navigation_news_to_newsDetailsFragment_"
-            app:destination="@id/newsDetailsFragment_"
+            app:destination="@id/navigation_news_details"
             app:enterAnim="@anim/slide_in_from_right"
             app:exitAnim="@anim/slide_out_to_left"
             app:popEnterAnim="@anim/slide_in_from_left"
@@ -23,25 +23,26 @@
         android:id="@+id/navigation_bookmarked"
         android:name="eu.codeyard.simplenews.framework.presentation.bookmarked.BookmarkedNewsListFragment_"
         android:label="@string/title_bookmark"
-        tools:layout="@layout/fragment_bookmarked_news_list" >
+        tools:layout="@layout/fragment_bookmarked_news_list">
         <action
             android:id="@+id/action_navigation_bookmarked_to_newsDetailsFragment_"
-            app:destination="@id/newsDetailsFragment_"
+            app:destination="@id/navigation_news_details"
             app:enterAnim="@anim/slide_in_from_right"
             app:exitAnim="@anim/slide_out_to_left"
             app:popEnterAnim="@anim/slide_in_from_left"
-            app:popExitAnim="@anim/slide_out_to_right"/>
+            app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_profile"
+        android:id="@+id/navigation_more"
         android:name="eu.codeyard.simplenews.framework.presentation.more.MoreFragment_"
         android:label="@string/title_more"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_more" >
+    </fragment>
 
     <fragment
-        android:id="@+id/newsDetailsFragment_"
+        android:id="@+id/navigation_news_details"
         android:name="eu.codeyard.simplenews.framework.presentation.newsdetails.NewsDetailsFragment_"
-        tools:layout="@layout/fragment_news_details"
-        android:label="NewsDetailsFragment_" />
+        android:label="NewsDetailsFragment_"
+        tools:layout="@layout/fragment_news_details" />
 </navigation>

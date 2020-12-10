@@ -23,7 +23,7 @@ import eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarViewModel;
 import static eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarPageState.MORE;
 
 @SuppressLint("NonConstantResourceId")
-@EFragment(R.layout.fragment_profile)
+@EFragment(R.layout.fragment_more)
 public class MoreFragment extends Fragment {
 
     @ViewById

@@ -112,30 +112,6 @@
         </Constraint>
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/searchIconStart">
-        <Constraint
-            android:id="@+id/icSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:alpha="1"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
-    </ConstraintSet>
-
-    <ConstraintSet android:id="@+id/searchIconEnd">
-        <Constraint
-            android:id="@+id/icSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:alpha="1"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintStart_toEndOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
-    </ConstraintSet>
-
     <Transition
         android:id="@+id/searchTrans"
         motion:constraintSetEnd="@+id/end"
