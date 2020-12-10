@@ -10,4 +10,7 @@
 
     <string name="search_hint">Keresés…</string>
     <string name="empty_search_result">Sajnos nem találtunk ilyen hírt :(</string>
+
+    <string name="go_to_repo">Ugrás a kódhoz!</string>
+    <string name="project_description">Ez a project a CodeYard és a Debreceni Egyetem közös együttműködésével valósulhatott meg.\n\nKattints a gombra a forráskód megtekintéséhez!</string>
 </resources>

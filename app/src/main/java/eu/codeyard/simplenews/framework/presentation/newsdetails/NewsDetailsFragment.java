@@ -21,7 +21,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-import eu.codeyard.simplenews.NewsReaderActivity_;
+import eu.codeyard.simplenews.WebViewActivity_;
 import eu.codeyard.simplenews.R;
 import eu.codeyard.simplenews.business.domain.model.Article;
 import eu.codeyard.simplenews.business.domain.util.DateUtil;
@@ -111,9 +111,9 @@ public class NewsDetailsFragment extends Fragment {
     @Click(R.id.readNewsButton)
     public void onReadNewsClicked() {
         if (isAdded() && getContext() != null && getActivity() != null) {
-            NewsReaderActivity_
+            WebViewActivity_
                     .intent(getContext())
-                    .newsUrl(article.getUrl())
+                    .url(article.getUrl())
                     .start();
         }
     }

@@ -9,16 +9,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+import eu.codeyard.simplenews.WebViewActivity_;
 import eu.codeyard.simplenews.R;
 import eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarViewModel;
+import eu.codeyard.simplenews.framework.presentation.util.Constants;
 
 import static eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarPageState.MORE;
 
@@ -27,7 +31,7 @@ import static eu.codeyard.simplenews.framework.presentation.titlebar.TitleBarPag
 public class MoreFragment extends Fragment {
 
     @ViewById
-    protected TextView profileTitle;
+    protected TextView descriptionDetail;
 
     private MoreViewModel moreViewModel;
     private TitleBarViewModel titleBarViewModel;
@@ -49,7 +53,7 @@ public class MoreFragment extends Fragment {
     }
 
     private void subscribeObservers() {
-        moreViewModel.getText().observe(getViewLifecycleOwner(), s -> profileTitle.setText(s));
+        moreViewModel.getText().observe(getViewLifecycleOwner(), s -> descriptionDetail.setText(s));
     }
 
     @Override

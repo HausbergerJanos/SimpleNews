@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".NewsReaderActivity_"
+        <activity android:name=".WebViewActivity_"
             android:theme="@style/ActivityWithDarkActionBarTheme"/>
     </application>
 

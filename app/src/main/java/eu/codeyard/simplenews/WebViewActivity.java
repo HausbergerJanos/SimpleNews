@@ -9,7 +9,6 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,11 +21,11 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
 
-@EActivity(R.layout.activity_news_reader)
-public class NewsReaderActivity extends AppCompatActivity {
+@EActivity(R.layout.activity_web_view)
+public class WebViewActivity extends AppCompatActivity {
 
     @Extra
-    protected String newsUrl;
+    protected String url;
 
     @ViewById
     protected WebView webView;
@@ -61,7 +60,7 @@ public class NewsReaderActivity extends AppCompatActivity {
             }
         });
 
-        webView.loadUrl(newsUrl);
+        webView.loadUrl(url);
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
