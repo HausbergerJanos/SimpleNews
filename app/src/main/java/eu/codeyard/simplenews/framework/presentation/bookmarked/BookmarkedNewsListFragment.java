@@ -71,8 +71,13 @@ public class BookmarkedNewsListFragment extends Fragment implements Interaction 
         initRecyclerView();
     }
 
+    private void search(String query) {
+        bookmarkedNewsListViewModel.searchInBookmarkedNews(getViewLifecycleOwner(), query);
+    }
+
     private void subscribeObservers() {
         bookmarkedNewsListViewModel.getArticles().observe(getViewLifecycleOwner(), this::handleNews);
+        titleBarViewModel.getSearchQuery().observe(getViewLifecycleOwner(), this::search);
     }
 
     public void handleNews(List<Article> articles) {
@@ -89,7 +94,9 @@ public class BookmarkedNewsListFragment extends Fragment implements Interaction 
         super.onStart();
         setUpTitleBar();
 
-        bookmarkedNewsListViewModel.getAllBookmarkedNews(getViewLifecycleOwner());
+        if (!titleBarViewModel.isSearchViewVisible()) {
+            bookmarkedNewsListViewModel.getAllBookmarkedNews(getViewLifecycleOwner());
+        }
     }
 
     private void setUpTitleBar() {

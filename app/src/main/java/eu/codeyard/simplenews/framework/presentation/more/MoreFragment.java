@@ -47,6 +47,14 @@ public class MoreFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    private void goToRepo() {
+        if (isAdded()) {
+            WebViewActivity_.intent(getActivity())
+                    .url(Constants.GITHUB_REPO)
+                    .start();
+        }
+    }
+
     @AfterViews
     protected void init() {
         subscribeObservers();
@@ -60,6 +68,11 @@ public class MoreFragment extends Fragment {
     public void onStart() {
         super.onStart();
         setUpTitleBar();
+    }
+
+    @Click(R.id.goToRepoButton)
+    public void onGoToRepoClick() {
+        goToRepo();
     }
 
     private void setUpTitleBar() {

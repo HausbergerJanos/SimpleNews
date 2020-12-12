@@ -39,6 +39,11 @@ public class NewsCacheDataSourceImpl implements NewsCacheDataSource {
     }
 
     @Override
+    public LiveData<List<Article>> searchInBookmarkedNews(String query) {
+        return newsDaoService.searchInBookmarkedNews(query);
+    }
+
+    @Override
     public LiveData<List<Article>> getAllBookmarkedNews() {
         return newsDaoService.getAllBookmarkedNews();
     }

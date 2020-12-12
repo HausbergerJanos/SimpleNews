@@ -33,7 +33,13 @@ public class SearchNewsInteractor {
         MutableLiveData<List<Article>> articles = new MutableLiveData<>();
 
         // Get cache data source
-        LiveData<List<Article>> newsCacheData = newsCacheDataSource.searchInNews(query);
+        LiveData<List<Article>> newsCacheData;
+
+        if (justBookmarked) {
+            newsCacheData = newsCacheDataSource.searchInBookmarkedNews(query);
+        } else {
+            newsCacheData = newsCacheDataSource.searchInNews(query);
+        }
 
         // Observe cached data
         newsCacheData.observe(lifecycleOwner, data -> {

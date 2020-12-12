@@ -14,6 +14,8 @@ public interface NewsCacheDataSource {
 
     LiveData<List<Article>> searchInNews(String query);
 
+    LiveData<List<Article>> searchInBookmarkedNews(String query);
+
     LiveData<List<Article>> getAllBookmarkedNews();
 
     void updateNewsBookmarkedState(String title, boolean isBookmarked);

@@ -55,6 +55,11 @@ public class NewsDaoServiceImpl implements NewsDaoService {
     }
 
     @Override
+    public LiveData<List<Article>> searchInBookmarkedNews(String query) {
+        return Transformations.map(newsDao.searchInBookmarkedNews(query), input -> articleCacheMapper.mapFromEntityList(input));
+    }
+
+    @Override
     public LiveData<List<Article>> getAllBookmarkedNews() {
         return Transformations.map(newsDao.getAllBookmarkedArticles(), input ->
                 articleCacheMapper.mapFromEntityList(input));
